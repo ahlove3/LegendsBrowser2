@@ -226,12 +226,22 @@ func (w *DfWorld) processEvents() {
 					hf.Vampire = true
 					hf.VampireSince = e.Year
 				}
+				if strings.HasPrefix(d.Interaction, "SECRET_") {
+					hf.Necromancer = true
+					hf.NecromancerSince = e.Year
+				}
 			}
 		case *HistoricalEventHfLearnsSecret:
 			if strings.HasPrefix(d.Interaction, "SECRET_") {
 				if hf, ok := w.HistoricalFigures[d.StudentHfid]; ok {
 					hf.Necromancer = true
 					hf.NecromancerSince = e.Year
+				}
+			}
+			if strings.HasPrefix(d.Interaction, "DEITY_CURSE_VAMPIRE_") {
+				if hf, ok := w.HistoricalFigures[d.StudentHfid]; ok {
+					hf.Vampire = true
+					hf.VampireSince = e.Year
 				}
 			}
 		case *HistoricalEventCreatedSite:
